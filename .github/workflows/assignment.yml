@@ -6,27 +6,28 @@ name: yml file for java hello - spring app
 
 on:
     workflow_dispatch:
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        maven: [ '3.8.8', '3.9.4' ]
-
-    name: Maven ${{ matrix.maven }} sample
-
-    steps:
-
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@< version >
-        with:
-          java-version: 8
-          maven-version: ${{ matrix.maven }}
-
-      - run: mvn -V ...
+    checkoutapp: #     1. Checking out the git repository (using third party actions)
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repository
+          uses: action/checkout@v3
+          
+        - name: installing the maven
+          uses: yuzhiyongcn/setup-maven@v1.0.0
+          with:
+            maven-version: 3.8.2
     
+    #     2. Build and test (build step should execute first) the java code
+        - name: building the repo and running it
+          run: |
+            mvn clean test
+            mvn clean package
+            mvn spring-boot:run
+            java -jar target/*.jar
+              
+    #     3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
+  
     # test:
     #     runs-on: ubuntu-latest
     #     steps:
