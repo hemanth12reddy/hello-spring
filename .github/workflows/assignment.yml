@@ -1,0 +1,45 @@
+# Create a Github Actions (GHA) pipeline to do the following (use triggers 
+# so that pipeline can run manually, on push to the branch and whenever 
+# there is a pull request raised to main branch):
+
+name: yml file for java hello - spring app
+
+on:
+    workflow_dispatch:
+
+
+jobs:
+    #     1. Checking out the git repository (using third party actions)
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repository
+              uses: actions/checkout@v3
+
+    #     2. Build and test (build step should execute first) the java code
+            - name: Set up Java
+              uses: actions/setup-java@v2
+              with:
+                  distribution: 'adopt'
+                  java-version: '11'
+  
+            - name: Setup Maven Action
+              uses: s4u/setup-maven-action@< version >
+              with:
+                maven-version: 1.8
+
+    
+            - run: mvn -V ...
+    
+    # test:
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: building the app
+    #           run: echo "hello world"
+
+    #     3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
+    #     4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and download the artifact(using third party actions). Use the appropriate triggers.
+    
+#     Note: Set GHA env variables for adding the artefacts in another branch using git add, commit, push under your name and email.
+    
+#     Then if you are done with the docker do the following:
