@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: checkout repository
-          uses: action/checkout@v3
+          uses: actions/checkout@v3
           
         - name: installing the maven
           uses: yuzhiyongcn/setup-maven@v1.0.0
