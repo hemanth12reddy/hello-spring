@@ -11,7 +11,7 @@ jobs:
         steps:
 # 1. Checking out the git repository (using third party actions)
         - name: Checkout
-          uses: actions/checkout@v4.1.1
+          uses: actions/checkout@v3
           
         - name: installing the maven
           uses: yuzhiyongcn/setup-maven@v1.0.0
