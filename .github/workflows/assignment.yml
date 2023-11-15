@@ -51,7 +51,11 @@ jobs:
             # optional
             # Destination path
             path: ./target # optional
-                  
+
+        - name: setting git credentials
+          run: |
+              git config --global user.email "hemanth12reddy@gmail.com"
+              git config --global user.name "Hemanth Reddy"
         - name: switching to artefacts-store
           run: |
               echo "these are the git hub branches"
