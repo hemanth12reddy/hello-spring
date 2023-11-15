@@ -56,7 +56,7 @@ jobs:
           run: |
               echo "these are the git hub branches"
               git branch -a
-              git checkout artefacts-store
+              git checkout -b artefacts-store
               git add ./target
               git commit -m "added artifacts"
               git push origin artefacts-store
