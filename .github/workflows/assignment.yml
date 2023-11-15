@@ -22,11 +22,7 @@ jobs:
         - name: building app
           run: mvn clean package
 
-# 3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
-        - name: changing the branch 
-          run: |
-              git checkout -b artefacts-store
-        
+# 3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.       
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v3.1.3
           with:
