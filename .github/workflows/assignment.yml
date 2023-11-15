@@ -55,7 +55,8 @@ jobs:
         - name: setting git credentials
           run: |
               git config --global user.email "hemanth12reddy@gmail.com"
-              git config --global user.name "Hemanth Reddy"
+              git config --global user.name "hemanth12reddy"
+              # token : {{ secrets._GITHUB_TOKEN }}
         - name: switching to artefacts-store
           run: |
               echo "these are the git hub branches"
