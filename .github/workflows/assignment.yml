@@ -52,14 +52,12 @@ jobs:
             # Destination path
             path: ./target # optional
 
-        - name: setting git credentials
+        - name: switching to artefacts-store
+          env:
+              token: ${{ secrets._GITHUB_TOKEN }}
           run: |
               git config --global user.email "hemanth12reddy@gmail.com"
               git config --global user.name "hemanth12reddy"
-          env:
-              token: ${{ secrets._GITHUB_TOKEN }}
-        - name: switching to artefacts-store
-          run: |
               echo "these are the git hub branches"
               git branch -a
               git checkout -b artefacts-store
