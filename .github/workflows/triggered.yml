@@ -17,7 +17,7 @@ jobs:
         
         - name: changing the branch 
           run: |
-              git checkout artefacts-store
+              git checkout -b artefacts-store
         
         - name: Download a Build Artifact
           uses: actions/download-artifact@v2.1.1
