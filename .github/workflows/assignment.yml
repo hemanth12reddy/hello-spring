@@ -17,15 +17,25 @@ jobs:
           uses: yuzhiyongcn/setup-maven@v1.0.0
           with:
             maven-version: 3.8.2
-    
+
+    build:
+        runs-on: ubuntu-latest
+        needs: [checkoutapp]
     #     2. Build and test (build step should execute first) the java code
+        steps:
         - name: building the repo and running it
           run: |
             mvn clean test
             mvn clean package
             mvn spring-boot:run
             java -jar target/*.jar
-              
+
+    result:
+        runs-on: ubuntu-latest
+        needs: [build]
+        steps:
+            - name: result
+              run: echo "built successfully"
     #     3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
   
     # test:
