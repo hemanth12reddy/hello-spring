@@ -24,17 +24,18 @@ jobs:
         runs-on : ubuntu-latest
         needs: [checkoutapp]
         steps: 
-        - name: building the repo and running it
-          run: |
-            mvn clean test
-            mvn clean package
-
         - name : printing files and work dir
           run : |
               echo "workd path"
               pwd
               echo "work dir"
               ls
+              
+        - name: building the repo and running it
+          run: |
+            mvn clean test
+            mvn clean package
+
         
         - name: starting app
           run: |
