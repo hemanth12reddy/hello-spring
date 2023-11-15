@@ -55,7 +55,7 @@ jobs:
         - name: switching to artefacts-store
           run: |
               git checkout artefacts-store
-              git add ./artifacts
+              git add ./target
               git commit -m "added artifacts"
               git push origin artefacts-store
               echo "pushed to artefacts store"
