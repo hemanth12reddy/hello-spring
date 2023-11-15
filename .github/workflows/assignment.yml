@@ -53,19 +53,21 @@ jobs:
             path: ./target # optional
 
         - name: switching to artefacts-store
-          env:
-              token: ${{ secrets._GITHUB_TOKEN }}
           run: |
               git config --global user.email "hemanth12reddy@gmail.com"
               git config --global user.name "hemanth12reddy"
-              git config --global credential.helper store
-              echo "machine github.com login hemanth12reddy password=${{ secrets._GITHUB_TOKEN }}" > ~/.netrc
+              
               echo "these are the git hub branches"
               git branch -a
+              
               git checkout -b artefacts-store
               git add ./target
               git commit -m "added artifacts"
+              
+              git remote set-url origin https//hemanth:${{secrets._GITHUB_TOKEN}}@github.com/hemanth12reddy/hello-spring.git
+              
               git push origin artefacts-store
+              
               echo "pushed to artefacts store"
     
     
