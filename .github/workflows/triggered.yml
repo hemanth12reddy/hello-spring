@@ -1,0 +1,36 @@
+
+name: triggered workflow
+on:
+  workflow_run:
+    workflows: [hello-spring]
+    types:
+      - completed
+
+jobs:
+  download-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4.1.1
+        
+        - name: changing the branch 
+          run: |
+              git checkout artefacts-store
+        
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v2.1.1
+          with:
+            name: hello-0.0.1-SNAPSHOT.jar
+            path: ./target
+        
+        
+        - name: switching to artefacts-store branch
+          run: |
+              git config --global user.email "hemanth12reddy@gmail.com"
+              git config --global user.name "hemanth12reddy"
+        
+        - name: Git add, Commit and Push
+              git add ./target/hello-0.0.1-SNAPSHOT.jar
+              git commit -m "added artifacts"
+              git push origin artefacts-store
+ 
