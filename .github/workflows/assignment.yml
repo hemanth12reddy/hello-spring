@@ -20,10 +20,10 @@ jobs:
 
 
     #     2. Build and test (build step should execute first) the java code
-    build:
-        runs-on : ubuntu-latest
-        needs: [checkoutapp]
-        steps: 
+    # build:
+    #     runs-on : ubuntu-latest
+    #     needs: [checkoutapp]
+    #     steps: 
         - name : printing files and work dir
           run : |
               echo "workd path"
@@ -44,7 +44,7 @@ jobs:
 
     result:
         runs-on: ubuntu-latest
-        needs: [build]
+        needs: [checkoutapp]
         steps:
             - name: result
               run: echo "built successfully"
