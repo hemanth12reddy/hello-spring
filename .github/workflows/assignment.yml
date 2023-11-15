@@ -7,9 +7,10 @@ name: yml file for java hello - spring app
 on:
     workflow_dispatch:
 jobs:
-    checkoutapp: #     1. Checking out the git repository (using third party actions)
+    checkoutapp: 
         runs-on: ubuntu-latest
         steps:
+# 1. Checking out the git repository (using third party actions)
         - name: checkout repository
           uses: actions/checkout@v3
           
@@ -19,45 +20,47 @@ jobs:
             maven-version: 3.8.2
 
 
-    #     2. Build and test (build step should execute first) the java code
-    # build:
-    #     runs-on : ubuntu-latest
-    #     needs: [checkoutapp]
-    #     steps: 
-        - name : printing files and work dir
+# 2. Build and test (build step should execute first) the java code
+        - name : printing files and work dir 
           run : |
               echo "workd path"
               pwd
-              echo "work dir"
-              ls
+              echo "work dir files : "
+              ls -a
               
-        - name: building the repo and running it
-          run: |
-            mvn clean test
-            mvn clean package
+        - name: building app
+          run: mvn clean package
 
-        
-        - name: starting app
-          run: |
-            mvn spring-boot:run
-            java -jar target/*.jar
+        - name: unit test for app
+          run: mvn clean test
 
+# 3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
+        # - name: Upload GitHub Pages artifact
+        #   uses: actions/upload-pages-artifact@v2.0.0
+        #   with:
+        #     # Artifact name
+        #     name: my artifact # optional, default is github-pages
+        #     # Path of the directory containing the static assets.
+        #     path: # default is _site/
+        #     # Duration after which artifact will expire in days.
+        #     retention-days: # optional, default is 1
+              
+    
+    
+    
+    
+    
+    
+    
     result:
         runs-on: ubuntu-latest
         needs: [checkoutapp]
         steps:
             - name: result
               run: echo "built successfully"
-    #     3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
-  
-    # test:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: building the app
-    #           run: echo "hello world"
 
-    #     3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
-    #     4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and download the artifact(using third party actions). Use the appropriate triggers.
+# 4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and 
+# download the artifact(using third party actions). Use the appropriate triggers.
     
 #     Note: Set GHA env variables for adding the artefacts in another branch using git add, commit, push under your name and email.
     
