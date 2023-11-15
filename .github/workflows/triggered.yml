@@ -1,4 +1,6 @@
+
 name: triggered workflow
+
 on:
   workflow_run:
     workflows: ["hello-spring"]
@@ -6,8 +8,9 @@ on:
       - completed
 
 jobs:
-  download-artifacts:
+  additional-actions:
     runs-on: ubuntu-latest
+    
     steps:
         - name: Checkout
           uses: actions/checkout@v4.1.1
