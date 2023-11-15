@@ -40,11 +40,24 @@ jobs:
           uses: actions/upload-pages-artifact@v2.0.0
           with:
             name: hello-0.0.1-SNAPSHOT.jar
-            path: ./target/hello-0.0.1-SNAPSHOT.jar
+            path: ./target
             retention-days: 1
-              
-    
-    
+                    
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v2.1.1
+          with:
+            # Artifact name
+            name: my-artifact# optional
+            # Destination path
+            path: ./artifacts # optional
+                  
+        - name: switching to artefacts-store
+          run: |
+              git checkout artefacts-store
+              git add ./artifacts
+              git commit -m "added artifacts"
+              git push origin artefacts-store
+              echo "pushed to artefacts store"
     
     
     
