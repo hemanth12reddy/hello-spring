@@ -2,7 +2,7 @@
 # so that pipeline can run manually, on push to the branch and whenever 
 # there is a pull request raised to main branch):
 
-name: yml file for java hello - spring app
+name: hello-spring
 
 on: ["workflow_dispatch", "push"]
 jobs:
@@ -18,21 +18,9 @@ jobs:
           with:
             maven-version: 3.8.2
 
-
 # 2. Build and test (build step should execute first) the java code
         - name: building app
           run: mvn clean package
-              
-        # - name : printing files and work dir 
-        #   run : |
-        #       echo "workd path"
-        #       pwd
-        #       echo "work dir files : "
-        #       ls -a
-        #       ls -a target
-
-        # - name: unit test for app
-        #   run: mvn clean test
 
 # 3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.
         - name: Upload GitHub Pages artifact
@@ -41,7 +29,7 @@ jobs:
             name: hello-0.0.1-SNAPSHOT.jar
             path: ./target
             retention-days: 1
-                    
+                   
         - name: Download a Build Artifact
           uses: actions/download-artifact@v2.1.1
           with:
@@ -62,23 +50,11 @@ jobs:
               git checkout -b artefacts-store
               git add ./target
               git commit -m "added artifacts"
+              
               git remote -v
-              # git remote set-url origin https://hemanth:${{ secrets._GITHUB_TOKEN }}@github.com/${{ github.repository }}
               
               git push origin artefacts-store
               
-              echo "pushed to artefacts store"
-    
-    
-    
-    
-    
-    result:
-        runs-on: ubuntu-latest
-        needs: [checkoutapp]
-        steps:
-            - name: result
-              run: echo "built successfully"
 
 # 4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and 
 # download the artifact(using third party actions). Use the appropriate triggers.
