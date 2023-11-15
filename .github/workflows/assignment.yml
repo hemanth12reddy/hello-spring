@@ -4,8 +4,7 @@
 
 name: yml file for java hello - spring app
 
-on:
-    workflow_dispatch:
+on: ["workflow_dispatch", "push"]
 jobs:
     checkoutapp: 
         runs-on: ubuntu-latest
@@ -64,7 +63,7 @@ jobs:
               git add ./target
               git commit -m "added artifacts"
               
-              git remote set-url origin https://hemanth:${{secrets._GITHUB_TOKEN}}@github.com/hemanth12reddy/hello-spring.git
+              git remote set-url origin https://hemanth:${{ secrets._GITHUB_TOKEN }}@github.com/hemanth12reddy/hello-spring.git
               
               git push origin artefacts-store
               
