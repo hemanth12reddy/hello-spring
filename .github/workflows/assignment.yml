@@ -30,6 +30,7 @@ jobs:
               pwd
               echo "work dir files : "
               ls -a
+              ls -a target
 
         - name: unit test for app
           run: mvn clean test
