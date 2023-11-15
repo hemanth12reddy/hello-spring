@@ -25,6 +25,16 @@ jobs:
           run: |
             mvn clean test
             mvn clean package
+
+        - name : printing files and work dir
+          run : |
+              echo "workd path"
+              pwd
+              echo "work dir"
+              ls
+        
+        - name: starting app
+          run: |
             mvn spring-boot:run
             java -jar target/*.jar
 
