@@ -30,7 +30,34 @@ jobs:
             path: ./target
             retention-days: 1
 
-
+    additional-actions:
+        runs-on: ubuntu-latest
+        needs: ["checkoutapp"]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+    
+            - name: Download a Build Artifact
+              uses: actions/download-artifact@v2.1.1
+              with:
+                name: hello-0.0.1-SNAPSHOT.jar
+                path: ./target
+            
+            - name: changing the branch 
+              run: |
+                  git checkout -b artefacts-store
+            
+            - name: switching to artefacts-store branch
+              run: |
+                  git config --global user.email "hemanth12reddy@gmail.com"
+                  git config --global user.name "hemanth12reddy"
+            
+            - name: Git add, Commit and Push
+              run: |
+                  git add ./target/hello-0.0.1-SNAPSHOT.jar
+                  git commit -m "added artifacts"
+                  git push origin artefacts-store
+ 
               
 
 # 4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and 
