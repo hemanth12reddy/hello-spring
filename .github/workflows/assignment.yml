@@ -18,11 +18,9 @@ jobs:
           with:
             maven-version: 3.8.2
 
-    build:
-        runs-on: ubuntu-latest
-        needs: [checkoutapp]
+
     #     2. Build and test (build step should execute first) the java code
-        steps:
+
         - name: building the repo and running it
           run: |
             mvn clean test
@@ -32,7 +30,7 @@ jobs:
 
     result:
         runs-on: ubuntu-latest
-        needs: [build]
+        needs: [checkoutapp]
         steps:
             - name: result
               run: echo "built successfully"
