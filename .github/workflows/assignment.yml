@@ -54,6 +54,8 @@ jobs:
                   
         - name: switching to artefacts-store
           run: |
+              echo "these are the git hub branches"
+              git branch -a
               git checkout artefacts-store
               git add ./target
               git commit -m "added artifacts"
