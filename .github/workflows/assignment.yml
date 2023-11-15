@@ -65,7 +65,7 @@ jobs:
               git remote -v
               # git remote set-url origin https://hemanth:${{ secrets._GITHUB_TOKEN }}@github.com/${{ github.repository }}
               
-              # git push origin artefacts-store
+              git push origin artefacts-store
               
               echo "pushed to artefacts store"
     
