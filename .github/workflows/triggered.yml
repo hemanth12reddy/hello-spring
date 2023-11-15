@@ -1,7 +1,7 @@
 name: triggered workflow
 on:
   workflow_run:
-    workflows: [hello-spring]
+    workflows: ["hello-spring"]
     types:
       - completed
 
