@@ -21,15 +21,15 @@ jobs:
 
 
 # 2. Build and test (build step should execute first) the java code
+        - name: building app
+          run: mvn clean package
+              
         - name : printing files and work dir 
           run : |
               echo "workd path"
               pwd
               echo "work dir files : "
               ls -a
-              
-        - name: building app
-          run: mvn clean package
 
         - name: unit test for app
           run: mvn clean test
