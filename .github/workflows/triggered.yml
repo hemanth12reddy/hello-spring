@@ -32,6 +32,7 @@ jobs:
               git config --global user.name "hemanth12reddy"
         
         - name: Git add, Commit and Push
+          run: |
               git add ./target/hello-0.0.1-SNAPSHOT.jar
               git commit -m "added artifacts"
               git push origin artefacts-store
