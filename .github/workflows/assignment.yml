@@ -51,7 +51,6 @@ jobs:
                 context: .
                 push: true
                 tags: hemanth12reddy/git-hub-actions:latest
-                github-token: ${{ _GITHUB_TOKEN }}
           
         
 
