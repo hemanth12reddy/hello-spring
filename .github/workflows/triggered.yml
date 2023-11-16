@@ -2,10 +2,10 @@
 name: triggered workflow
 
 on:
-  workflow_run:
-    workflows: ["hello-spring"]
-    types:
-      - completed
+  workflow_call:
+    # workflows: ["hello-spring"]
+    # types:
+    #   - completed
 
 jobs:
   additional-actions:
