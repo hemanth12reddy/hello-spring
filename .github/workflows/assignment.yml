@@ -1,7 +1,3 @@
-# Create a Github Actions (GHA) pipeline to do the following (use triggers 
-# so that pipeline can run manually, on push to the branch and whenever 
-# there is a pull request raised to main branch):
-
 name: hello-spring
 
 on: workflow_dispatch
@@ -9,7 +5,6 @@ jobs:
     checkoutapp: 
         runs-on: ubuntu-latest
         steps:
-# 1. Checking out the git repository (using third party actions)
         - name: Checkout
           uses: actions/checkout@v3
           
@@ -17,56 +12,17 @@ jobs:
           uses: yuzhiyongcn/setup-maven@v1.0.0
           with:
             maven-version: 3.8.2
-
-# 2. Build and test (build step should execute first) the java code
+            
         - name: building app
           run: mvn clean package
-
-# 3. Upload the artifacts (using third party actions)(to another branch named artefacts-store ) from build step for persistence.       
+          
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v3.1.3
           with:
             name: hello-0.0.1-SNAPSHOT.jar
             path: ./target
             retention-days: 1
+            
     pushtogithub: 
         needs: checkoutapp
         uses: ./.github/workflows/triggered.yml
-                     
-    # additional-actions:
-    #     runs-on: ubuntu-latest
-    #     needs: ["checkoutapp"]
-    #     steps:
-    #         - name: Checkout
-    #           uses: actions/checkout@v3
-
-    
-    #         - name: Download a Build Artifact
-    #           uses: actions/download-artifact@v2.1.1
-    #           with:
-    #             name: hello-0.0.1-SNAPSHOT.jar
-    #             path: ./target
-            
-    #         - name: changing the branch 
-    #           run: |
-    #               git checkout -b artefacts-store
-            
-    #         - name: switching to artefacts-store branch
-    #           run: |
-    #               git config --global user.email "hemanth12reddy@gmail.com"
-    #               git config --global user.name "hemanth12reddy"
-            
-    #         - name: Git add, Commit and Push
-    #           run: |
-    #               git add ./target/hello-0.0.1-SNAPSHOT.jar
-    #               git commit -m "added artifacts"
-    #               git push origin artefacts-store
- 
-              
-
-# 4. Create another pipeline, this pipeline will be triggered by the previous pipeline only and 
-# download the artifact(using third party actions). Use the appropriate triggers.
-    
-#     Note: Set GHA env variables for adding the artefacts in another branch using git add, commit, push under your name and email.
-    
-#     Then if you are done with the docker do the following:
