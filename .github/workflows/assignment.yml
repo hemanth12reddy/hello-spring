@@ -30,7 +30,6 @@ jobs:
             path: ./target
             retention-days: 1
     pushtogithub: 
-        runs-on: ubuntu-latest
         needs: checkoutapp
         uses: ./.github/workflows/triggered.yml
                      
