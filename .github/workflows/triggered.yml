@@ -25,7 +25,7 @@ jobs:
         
         - name: changing the branch 
           run: |
-              git checkout -b artefacts-store
+              git checkout artefacts-store
         
         - name: switching to artefacts-store branch
           run: |
