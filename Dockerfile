@@ -1,5 +1,8 @@
-# stage 1
+# stage 0
 FROM maven:latest as stage1
+
+#stage 1
+WORKDIR /app
 
 # stage 2
 COPY . .
