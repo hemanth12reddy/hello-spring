@@ -3,10 +3,7 @@ name: triggered workflow
 
 on:
   workflow_call:
-    # workflows: ["hello-spring"]
-    # types:
-    #   - completed
-
+  
 jobs:
   additional-actions:
     runs-on: ubuntu-latest
