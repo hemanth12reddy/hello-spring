@@ -29,29 +29,3 @@ jobs:
     pushtogithub: 
         needs: checkoutapp
         uses: ./.github/workflows/triggered.yml
-
-
-    DockerLogin:
-        runs-on: ubuntu-latest
-        needs: ["pushtogithub"]
-        steps:
-            - name: Docker Login
-              uses: docker/login-action@v3.0.0
-              with:
-                  username: ${{ secrets.Docker_Username }}
-                  password: ${{ secrets.Docker_Password }}
-
-    Docker_Build_And_Push:
-        runs-on: ubuntu-latest
-        needs: [ "DockerLogin" ]
-        steps:
-            - name: Build and push Docker images
-              uses: docker/build-push-action@v5.0.0
-              with:
-                context: .
-                push: true
-                tags: hemanth12reddy/git-hub-actions:latest
-          
-        
-
-          
