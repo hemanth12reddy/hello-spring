@@ -13,7 +13,7 @@ jobs:
           
         - name: echo username
           run: |
-            echo "the username is $DOCKER_USERNAME or env.varibale "
+            echo "the username is  or env.varibale ${{  env.DOCKER_USERNAME  }}"
             echo "with $  ${{  DOCKER_USERNAME  }}"
             
     #     - name: building app
