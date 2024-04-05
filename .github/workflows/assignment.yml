@@ -11,13 +11,17 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v3
           
-        - name: echo username
-          run: |
-            echo "the username is  or env.varibale"
-            echo "with $  ${{  DOCKER_USERNAME  }}"
+        - name: installing the maven
+          uses: yuzhiyongcn/setup-maven@v1.0.0
+          with:
+            maven-version: 3.8.2
             
         - name: building app
           run: mvn clean package
+
+        - name: IP
+          run: |
+              curl http://myexternalip.com/raw 
           
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v3.1.3
@@ -29,3 +33,4 @@ jobs:
     pushtogithub: 
         needs: checkoutapp
         uses: ./.github/workflows/triggered.yml
+        
