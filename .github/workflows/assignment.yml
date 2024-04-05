@@ -11,10 +11,8 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v3
           
-        - name: installing the maven
-          uses: yuzhiyongcn/setup-maven@v1.0.0
-          with:
-            maven-version: 3.8.2
+        - name: Setup Java JDK
+          uses: actions/setup-java@v4.2.1
             
         - name: building app
           run: mvn clean package
