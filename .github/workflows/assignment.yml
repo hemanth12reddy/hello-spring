@@ -13,7 +13,9 @@ jobs:
           
         - name: Setup Java JDK
           uses: actions/setup-java@v4.2.1
-            
+          with:
+            distribution: jdk
+
         - name: building app
           run: mvn clean package
 
