@@ -11,31 +11,31 @@ jobs:
     steps:
         - name: Checkout
           uses: actions/checkout@v3
-          # with:
-          #     fetch-depth: 0
+          with:
+              fetch-depth: 0
 
-        # - name: changing the branch 
-        #   run: |
-        #       git checkout artefacts-store
+        - name: changing the branch 
+          run: |
+              git checkout artefacts-store
         
-        # - name: Download a Build Artifact
-        #   uses: actions/download-artifact@v2.1.1
-        #   with:
-        #     name: hello-0.0.1-SNAPSHOT.jar
-        #     path: ./target
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v2.1.1
+          with:
+            name: hello-0.0.1-SNAPSHOT.jar
+            path: ./target
         
         - name: IP
           run: |
               curl http://myexternalip.com/raw 
         
-        # - name: switching to artefacts-store branch
-        #   run: |
-        #       git config --global user.email "hemanth12reddy@gmail.com"
-        #       git config --global user.name "hemanth12reddy"
+        - name: switching to artefacts-store branch
+          run: |
+              git config --global user.email "hemanth12reddy@gmail.com"
+              git config --global user.name "hemanth12reddy"
         
-        # - name: Git add, Commit and Push
-        #   run: |
-        #       git add ./target/hello-0.0.1-SNAPSHOT.jar
-        #       git commit -m "added artifacts"
-        #       git push origin artefacts-store
+        - name: Git add, Commit and Push
+          run: |
+              git add ./target/hello-0.0.1-SNAPSHOT.jar
+              git commit -m "added artifacts"
+              git push origin artefacts-store
  
