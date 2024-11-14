@@ -24,10 +24,6 @@ jobs:
             name: hello-0.0.1-SNAPSHOT.jar
             path: ./target
         
-        - name: IP
-          run: |
-              curl http://myexternalip.com/raw 
-        
         - name: switching to artefacts-store branch
           run: |
               git config --global user.email "hemanth12reddy@gmail.com"
