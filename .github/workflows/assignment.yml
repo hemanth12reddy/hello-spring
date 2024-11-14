@@ -12,7 +12,9 @@ jobs:
           uses: actions/checkout@v3
           
         - name: Setup Java JDK
-          uses: actions/setup-java@v4
+          uses: actions/setup-java@v4.5.0
+          with:
+            distribution: jdk
 
         - name: building app
           run: mvn clean package
@@ -28,3 +30,4 @@ jobs:
         needs: checkoutapp
         uses: ./.github/workflows/triggered.yml
         
+          
